@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --doner-red: #A43F42;
+    --doner-vermillion: #E75625;
+    --doner-amber: #FDB719;
+    --doner-black: #171717;
+    --doner-white: #F4F4F5;
+  }
+
+
+  body {
+    @apply bg-doner-white text-doner-black;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bronco;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply bg-doner-vermillion text-white px-6 py-3 rounded-lg font-bold hover:bg-doner-red transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-doner-amber text-doner-black px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-lg overflow-hidden;
+  }
+
+  .menu-category {
+    @apply mb-8;
+  }
+
+  .menu-item {
+    @apply bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow duration-200;
+  }
+}
