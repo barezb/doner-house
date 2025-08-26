@@ -1,12 +1,19 @@
 'use client'
 
 import Link from 'next/link'
-import { FaUtensils, FaListAlt, FaPlus, FaCog, FaSignOutAlt } from 'react-icons/fa'
+import { useState } from 'react'
+import { FaUtensils, FaListAlt, FaPlus, FaSignOutAlt } from 'react-icons/fa'
 import { AuthProvider, useAuth } from '@/contexts/AuthContext'
 import ProtectedRoute from '@/components/admin/ProtectedRoute'
+import MenuItemForm from '@/components/admin/MenuItemForm'
 
 function AdminDashboardContent() {
   const { logout } = useAuth()
+  const [showForm, setShowForm] = useState(false)
+
+  const handleFormClose = () => {
+    setShowForm(false)
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -41,23 +48,25 @@ function AdminDashboardContent() {
             <p className="text-gray-600">Add, edit, and remove menu items</p>
           </Link>
 
-          <Link href="/admin/menu-items/new" className="card p-6 hover:shadow-xl transition-shadow">
+          <button 
+            onClick={() => setShowForm(true)}
+            className="card p-6 hover:shadow-xl transition-shadow text-left"
+          >
             <div className="flex items-center mb-4">
               <FaPlus className="text-3xl text-doner-amber mr-4" />
               <h2 className="font-bronco text-2xl">ADD ITEM</h2>
             </div>
             <p className="text-gray-600">Quick add new menu item</p>
-          </Link>
-
-          <Link href="/admin/settings" className="card p-6 hover:shadow-xl transition-shadow">
-            <div className="flex items-center mb-4">
-              <FaCog className="text-3xl text-doner-black mr-4" />
-              <h2 className="font-bronco text-2xl">SETTINGS</h2>
-            </div>
-            <p className="text-gray-600">Configure system settings</p>
-          </Link>
+          </button>
         </div>
       </div>
+
+      {showForm && (
+        <MenuItemForm
+          menuItem={null}
+          onClose={handleFormClose}
+        />
+      )}
     </div>
   )
 }
