@@ -17,6 +17,7 @@ export async function uploadToS3(file: Buffer, filename: string, contentType: st
     Key: key,
     Body: file,
     ContentType: contentType,
+    ACL: 'public-read',
   })
 
   await s3Client.send(command)

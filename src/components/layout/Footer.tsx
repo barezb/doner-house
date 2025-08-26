@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 
 export default function Footer() {
@@ -7,7 +8,13 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="font-bronco text-2xl mb-4">DONER HOUSE</h3>
+            <Image 
+              src="/logo-white.svg" 
+              alt="Doner House Logo" 
+              width={150} 
+              height={50}
+              className="h-10 w-auto mb-4"
+            />
             <p className="text-sm">
               Authentic Mediterranean cuisine served with passion and tradition.
             </p>

@@ -20,12 +20,14 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center">
-            <div className="text-white font-bronco text-2xl flex items-center gap-2">
-              <div className="w-12 h-12 bg-doner-red rounded-lg flex items-center justify-center">
-                <span className="text-3xl">🥙</span>
-              </div>
-              <span>DONER HOUSE</span>
-            </div>
+            <Image 
+              src="/logo-white.svg" 
+              alt="Doner House Logo" 
+              width={180} 
+              height={60}
+              className="h-12 w-auto"
+              priority
+            />
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">

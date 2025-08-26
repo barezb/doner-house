@@ -5,13 +5,13 @@ import Image from 'next/image'
 import { FaCloudUploadAlt, FaTrash } from 'react-icons/fa'
 
 interface ImageUploadProps {
-  currentImage: string | null
+  currentImage?: string | null
   onImageUpload: (imageUrl: string) => void
 }
 
 export default function ImageUpload({ currentImage, onImageUpload }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false)
-  const [preview, setPreview] = useState<string | null>(currentImage)
+  const [preview, setPreview] = useState<string | null>(currentImage || null)
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -49,10 +49,13 @@ export default function ImageUpload({ currentImage, onImageUpload }: ImageUpload
     <div className="space-y-4">
       {preview ? (
         <div className="relative">
-          <div className="relative h-48 bg-gradient-to-br from-doner-amber to-doner-vermillion rounded-lg overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center text-white text-6xl">
-              🍽️
-            </div>
+          <div className="relative h-48 rounded-lg overflow-hidden">
+            <Image
+              src={preview}
+              alt="Preview"
+              fill
+              className="object-cover"
+            />
           </div>
           <button
             type="button"

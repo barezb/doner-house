@@ -38,6 +38,7 @@ export default function MenuItemForm({ menuItem, onClose }: MenuItemFormProps) {
 
   useEffect(() => {
     fetchCategories()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const fetchCategories = async () => {

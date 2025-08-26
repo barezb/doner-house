@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { FaArrowLeft, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import MenuItemForm from '@/components/admin/MenuItemForm'
+import { formatPrice } from '@/lib/formatPrice'
 
 interface MenuItem {
   id: string
@@ -85,7 +86,10 @@ export default function MenuItemsPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <button
-            onClick={() => setShowForm(true)}
+            onClick={() => {
+              setEditingItem(null)
+              setShowForm(true)
+            }}
             className="btn-primary inline-flex items-center"
           >
             <FaPlus className="mr-2" /> Add New Item
@@ -111,8 +115,19 @@ export default function MenuItemsPage() {
                 {menuItems.map((item) => (
                   <tr key={item.id} className="border-b hover:bg-gray-50">
                     <td className="px-6 py-4">
-                      <div className="w-16 h-16 bg-gradient-to-br from-doner-amber to-doner-vermillion rounded-lg flex items-center justify-center">
-                        <span className="text-2xl">🍽️</span>
+                      <div className="w-16 h-16 rounded-lg overflow-hidden relative">
+                        {item.image ? (
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-doner-amber to-doner-vermillion flex items-center justify-center">
+                            <span className="text-2xl">🍽️</span>
+                          </div>
+                        )}
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -124,7 +139,7 @@ export default function MenuItemsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4">{item.category.name}</td>
-                    <td className="px-6 py-4">${item.price.toFixed(2)}</td>
+                    <td className="px-6 py-4">{formatPrice(item.price)}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2 py-1 rounded text-xs font-bold ${
                         item.active 

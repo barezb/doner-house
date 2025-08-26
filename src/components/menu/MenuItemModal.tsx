@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import Image from 'next/image'
 import { HiX } from 'react-icons/hi'
+import { formatPrice } from '@/lib/formatPrice'
 
 interface MenuItemModalProps {
   item: {
@@ -34,17 +35,20 @@ export default function MenuItemModal({ item, onClose }: MenuItemModalProps) {
           <HiX className="text-xl" />
         </button>
 
-        {item.image ? (
-          <div className="relative h-64 bg-gradient-to-br from-doner-amber to-doner-vermillion rounded-t-xl">
-            <div className="absolute inset-0 flex items-center justify-center text-white text-6xl">
-              🍽️
+        <div className="relative h-64 rounded-t-xl overflow-hidden">
+          {item.image ? (
+            <Image
+              src={item.image}
+              alt={item.name}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="h-full bg-gradient-to-br from-doner-amber to-doner-vermillion flex items-center justify-center">
+              <span className="text-6xl">🍽️</span>
             </div>
-          </div>
-        ) : (
-          <div className="h-64 bg-gradient-to-br from-doner-amber to-doner-vermillion rounded-t-xl flex items-center justify-center">
-            <span className="text-6xl">🍽️</span>
-          </div>
-        )}
+          )}
+        </div>
 
         <div className="p-6">
           <h2 className="font-bronco text-3xl mb-3">{item.name}</h2>
@@ -53,7 +57,7 @@ export default function MenuItemModal({ item, onClose }: MenuItemModalProps) {
           )}
           <div className="flex items-center justify-between">
             <span className="font-bronco text-2xl text-doner-vermillion">
-              ${item.price.toFixed(2)}
+              {formatPrice(item.price)}
             </span>
           </div>
         </div>

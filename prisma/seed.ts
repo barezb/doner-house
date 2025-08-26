@@ -31,12 +31,18 @@ async function main() {
   ]
 
   for (const cat of categories) {
-    const category = await prisma.category.upsert({
-      where: { name: cat.name },
-      update: {},
-      create: cat,
+    let category = await prisma.category.findFirst({
+      where: { name: cat.name }
     })
-    console.log('Created category:', category.name)
+    
+    if (!category) {
+      category = await prisma.category.create({
+        data: cat,
+      })
+      console.log('Created category:', category.name)
+    } else {
+      console.log('Category already exists:', category.name)
+    }
 
     // Add sample menu items for each category
     const menuItems = getMenuItemsForCategory(cat.name)
