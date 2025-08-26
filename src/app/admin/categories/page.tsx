@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { FaArrowLeft, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import CategoryForm from '@/components/admin/CategoryForm'
 import { getCategoryIcon } from '@/lib/icons'
+import { AuthProvider } from '@/contexts/AuthContext'
+import ProtectedRoute from '@/components/admin/ProtectedRoute'
 
 interface Category {
   id: string
@@ -14,7 +16,7 @@ interface Category {
   active: boolean
 }
 
-export default function CategoriesPage() {
+function CategoriesPageContent() {
   const [categories, setCategories] = useState<Category[]>([])
   const [editingCategory, setEditingCategory] = useState<Category | null>(null)
   const [showForm, setShowForm] = useState(false)
@@ -131,5 +133,15 @@ export default function CategoriesPage() {
         />
       )}
     </div>
+  )
+}
+
+export default function CategoriesPage() {
+  return (
+    <AuthProvider>
+      <ProtectedRoute>
+        <CategoriesPageContent />
+      </ProtectedRoute>
+    </AuthProvider>
   )
 }

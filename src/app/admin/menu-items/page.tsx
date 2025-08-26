@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { FaArrowLeft, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import MenuItemForm from '@/components/admin/MenuItemForm'
 import { formatPrice } from '@/lib/formatPrice'
+import { AuthProvider } from '@/contexts/AuthContext'
+import ProtectedRoute from '@/components/admin/ProtectedRoute'
 
 interface MenuItem {
   id: string
@@ -22,7 +24,7 @@ interface MenuItem {
   active: boolean
 }
 
-export default function MenuItemsPage() {
+function MenuItemsPageContent() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([])
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null)
   const [showForm, setShowForm] = useState(false)
@@ -180,5 +182,15 @@ export default function MenuItemsPage() {
         />
       )}
     </div>
+  )
+}
+
+export default function MenuItemsPage() {
+  return (
+    <AuthProvider>
+      <ProtectedRoute>
+        <MenuItemsPageContent />
+      </ProtectedRoute>
+    </AuthProvider>
   )
 }

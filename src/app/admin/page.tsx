@@ -1,11 +1,26 @@
-import Link from 'next/link'
-import { FaUtensils, FaListAlt, FaPlus, FaCog } from 'react-icons/fa'
+'use client'
 
-export default function AdminDashboard() {
+import Link from 'next/link'
+import { FaUtensils, FaListAlt, FaPlus, FaCog, FaSignOutAlt } from 'react-icons/fa'
+import { AuthProvider, useAuth } from '@/contexts/AuthContext'
+import ProtectedRoute from '@/components/admin/ProtectedRoute'
+
+function AdminDashboardContent() {
+  const { logout } = useAuth()
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="bg-doner-black py-8">
-        <h1 className="font-bronco text-4xl text-center text-white">ADMIN DASHBOARD</h1>
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <h1 className="font-bronco text-4xl text-white">ADMIN DASHBOARD</h1>
+          <button
+            onClick={logout}
+            className="flex items-center gap-2 bg-doner-red hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            <FaSignOutAlt />
+            Logout
+          </button>
+        </div>
       </div>
 
       <div className="container mx-auto px-4 py-8">
@@ -44,5 +59,15 @@ export default function AdminDashboard() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function AdminDashboard() {
+  return (
+    <AuthProvider>
+      <ProtectedRoute>
+        <AdminDashboardContent />
+      </ProtectedRoute>
+    </AuthProvider>
   )
 }
