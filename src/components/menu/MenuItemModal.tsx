@@ -25,9 +25,9 @@ export default function MenuItemModal({ item, onClose }: MenuItemModalProps) {
   }, [])
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose}></div>
-      <div className="relative bg-white rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
+      <div className="absolute inset-0 bg-black bg-opacity-75" onClick={onClose}></div>
+      <div className="relative bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto md:flex">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
@@ -35,13 +35,15 @@ export default function MenuItemModal({ item, onClose }: MenuItemModalProps) {
           <HiX className="text-xl" />
         </button>
 
-        <div className="relative h-64 rounded-t-xl overflow-hidden">
+        {/* Image Section - Full height on desktop, aspect ratio preserved */}
+        <div className="relative w-full md:w-1/2 h-64 md:h-auto md:min-h-[400px] rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden bg-gray-100">
           {item.image ? (
             <Image
               src={item.image}
               alt={item.name}
               fill
-              className="object-cover"
+              className="object-contain md:object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           ) : (
             <div className="h-full bg-gradient-to-br from-doner-amber to-doner-vermillion flex items-center justify-center">
@@ -50,13 +52,14 @@ export default function MenuItemModal({ item, onClose }: MenuItemModalProps) {
           )}
         </div>
 
-        <div className="p-6">
-          <h2 className="font-bronco text-3xl mb-3">{item.name}</h2>
+        {/* Content Section */}
+        <div className="p-6 md:p-8 md:w-1/2 flex flex-col justify-center">
+          <h2 className="font-bronco text-2xl md:text-4xl mb-3 md:mb-4">{item.name}</h2>
           {item.description && (
-            <p className="text-gray-600 mb-4">{item.description}</p>
+            <p className="text-gray-600 text-base md:text-lg mb-4 md:mb-6">{item.description}</p>
           )}
           <div className="flex items-center justify-between">
-            <span className="font-bronco text-2xl text-doner-vermillion">
+            <span className="font-bronco text-2xl md:text-3xl text-doner-vermillion">
               {formatPrice(item.price)}
             </span>
           </div>

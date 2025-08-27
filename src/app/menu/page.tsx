@@ -66,12 +66,67 @@ export default function MenuPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-doner-white">
-        <div className="bg-gradient-to-br from-doner-red to-doner-vermillion py-16">
+        {/* Header */}
+        <div className="bg-gradient-to-br from-doner-red to-doner-vermillion py-16 relative">
           <h1 className="font-bronco text-5xl text-center text-white">OUR MENU</h1>
+          <div className="absolute top-4 right-4 bg-white bg-opacity-20 text-white p-2 rounded-lg">
+            <div className="w-6 h-6 bg-white bg-opacity-30 rounded animate-pulse"></div>
+          </div>
         </div>
-        <div className="container mx-auto px-4 py-8 text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-doner-vermillion mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading menu...</p>
+
+        {/* Category Navigation Skeleton */}
+        <div className="sticky top-0 z-40 bg-white shadow-md">
+          <div className="container mx-auto px-4">
+            <div className="flex gap-4 py-4 overflow-x-auto">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div
+                  key={i}
+                  className="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full border-2 border-gray-300 bg-white"
+                >
+                  <div className="w-6 h-6 bg-gray-300 rounded animate-pulse"></div>
+                  <div className="w-16 h-4 bg-gray-300 rounded animate-pulse"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Menu Content Skeleton */}
+        <div className="container mx-auto px-4 py-8">
+          {[1, 2, 3].map((categoryIndex) => (
+            <section key={categoryIndex} className="mb-12">
+              {/* Category Title Skeleton */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-8 h-8 bg-gray-300 rounded animate-pulse"></div>
+                <div className="w-32 h-8 bg-gray-300 rounded animate-pulse"></div>
+              </div>
+
+              {/* Menu Items Grid Skeleton */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[1, 2, 3, 4, 5, 6].map((itemIndex) => (
+                  <div key={itemIndex} className="bg-white rounded-lg shadow-md overflow-hidden">
+                    {/* Image Skeleton */}
+                    <div className="w-full h-48 bg-gray-300 animate-pulse"></div>
+                    
+                    {/* Content Skeleton */}
+                    <div className="p-4">
+                      {/* Name Skeleton */}
+                      <div className="w-3/4 h-6 bg-gray-300 rounded animate-pulse mb-2"></div>
+                      
+                      {/* Description Skeleton */}
+                      <div className="space-y-2 mb-4">
+                        <div className="w-full h-4 bg-gray-200 rounded animate-pulse"></div>
+                        <div className="w-2/3 h-4 bg-gray-200 rounded animate-pulse"></div>
+                      </div>
+                      
+                      {/* Price Skeleton */}
+                      <div className="w-24 h-6 bg-doner-amber rounded animate-pulse"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
       </div>
     )
