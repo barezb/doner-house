@@ -100,7 +100,50 @@ export default function MenuDisplay({ categories }: MenuDisplayProps) {
               {category.name}
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {/* Mobile List View */}
+            <div className="md:hidden space-y-3 mb-8">
+              {category.menuItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow"
+                  onClick={() => setSelectedItem(item)}
+                >
+                  <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
+                    {item.image ? (
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 bg-gradient-to-br from-doner-amber to-doner-vermillion"></div>
+                        <div className="absolute inset-0 flex items-center justify-center text-white text-2xl">
+                          🍽️
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  
+                  <div className="flex-grow min-w-0">
+                    <h3 className="font-bronco text-lg text-doner-black mb-1">{item.name}</h3>
+                    {item.description && (
+                      <p className="text-gray-600 text-xs line-clamp-2">{item.description}</p>
+                    )}
+                  </div>
+                  
+                  <div className="text-right flex-shrink-0">
+                    <p className="font-bronco text-lg text-doner-vermillion whitespace-nowrap">
+                      {formatPrice(item.price)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop/Tablet Card View */}
+            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {category.menuItems.map((item) => (
                 <div
                   key={item.id}

@@ -101,8 +101,27 @@ export default function MenuPage() {
                 <div className="w-32 h-8 bg-gray-300 rounded animate-pulse"></div>
               </div>
 
-              {/* Menu Items Grid Skeleton */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Mobile List Skeleton */}
+              <div className="md:hidden space-y-3">
+                {[1, 2, 3, 4, 5, 6].map((itemIndex) => (
+                  <div key={itemIndex} className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+                    {/* Image Skeleton */}
+                    <div className="w-20 h-20 flex-shrink-0 bg-gray-300 rounded-lg animate-pulse"></div>
+                    
+                    {/* Content Skeleton */}
+                    <div className="flex-grow">
+                      <div className="w-3/4 h-5 bg-gray-300 rounded animate-pulse mb-2"></div>
+                      <div className="w-full h-3 bg-gray-200 rounded animate-pulse"></div>
+                    </div>
+                    
+                    {/* Price Skeleton */}
+                    <div className="w-20 h-5 bg-doner-amber rounded animate-pulse flex-shrink-0"></div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop/Tablet Grid Skeleton */}
+              <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1, 2, 3, 4, 5, 6].map((itemIndex) => (
                   <div key={itemIndex} className="bg-white rounded-lg shadow-md overflow-hidden">
                     {/* Image Skeleton */}
