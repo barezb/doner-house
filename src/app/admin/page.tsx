@@ -13,6 +13,8 @@ function AdminDashboardContent() {
 
   const handleFormClose = () => {
     setShowForm(false)
+    // Optional: Show success message or trigger a refresh
+    window.location.reload()
   }
 
   return (
